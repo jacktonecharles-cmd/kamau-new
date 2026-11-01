@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}Services & Pricing — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:150px 0 60px;">
+  <div class="container text-center reveal">
+    <span class="eyebrow">Full menu</span>
+    <h1>Services &amp; pricing</h1>
+    <p style="max-width:560px; margin:0 auto;">Every treatment includes a full consultation. Prices are in Kenyan Shillings (KES).</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container">
+    <div class="category-tabs reveal">
+      <button data-category-tab="all" class="active">All</button>
+      {% for cat in categories.keys() %}
+      <button data-category-tab="{{ cat }}">{{ cat }}</button>
+      {% endfor %}
+    </div>
+
+    {% for cat, items in categories.items() %}
+    <div class="grid grid-3 reveal-stagger" data-category-panel="{{ cat }}" style="margin-bottom:50px;">
+      {% for s in items %}
+      <div class="service-card">
+        <div class="service-media">{{ icon(s['icon'], 60) }}</div>
+        <div class="service-body">
+          <span class="tag">{{ s['category'] }}</span>
+          <h3 style="margin-top:12px;">{{ s['name'] }}</h3>
+          <p>{{ s['description'] }}</p>
+          <p class="muted" style="font-size:.85rem;">{{ icon('clock', 14) }} {{ s['duration_minutes'] }} minutes</p>
+          <div class="service-meta">
+            <span class="price">KES {{ s['price'] }}</span>
+            <a href="{{ url_for('booking') }}?service={{ s['id'] }}" class="btn btn-outline btn-sm">Book Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section--ink text-center reveal">
+  <div class="container">
+    <h2>Not sure what to choose?</h2>
+    <p>Call or WhatsApp us and we'll recommend the perfect treatment for you.</p>
+    <a href="tel:{{ salon_phone }}" class="btn btn-gold">{{ icon('phone', 16) }} Call {{ salon_phone }}</a>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}Booking Confirmed — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:160px 0 100px;">
+  <div class="container text-center reveal" style="max-width:600px;">
+    <div class="card-icon" style="margin:0 auto 20px; width:74px; height:74px;">{{ icon('star', 34) }}</div>
+    <span class="eyebrow">Booking received</span>
+    <h1>Thank you, {{ booking['customer_name'] }}!</h1>
+    <p>Your appointment request has been received. Our team will confirm it shortly by phone or SMS.</p>
+
+    <div class="card" style="text-align:left; margin-top:30px;">
+      <p><strong>Booking reference:</strong> #{{ booking['id'] }}</p>
+      <p><strong>Service:</strong> {{ booking['service_name'] or 'To be confirmed' }}</p>
+      <p><strong>Technician:</strong> {{ booking['technician_name'] or 'No preference' }}</p>
+      <p><strong>Date &amp; time:</strong> {{ booking['booking_date'] }} at {{ booking['booking_time'] }}</p>
+      <p><strong>Status:</strong> <span class="status-pill status-{{ booking['status'] }}">{{ booking['status'] }}</span></p>
+    </div>
+
+    <div class="hero-cta" style="justify-content:center; margin-top:30px;">
+      <a href="{{ url_for('payment') }}" class="btn btn-primary">Pay Deposit / Submit Payment</a>
+      <a href="{{ url_for('home') }}" class="btn btn-outline">Back to Home</a>
+    </div>
+    <p class="helper" style="margin-top:24px;">Need to change something? Call or WhatsApp {{ salon_phone }} and quote reference #{{ booking['id'] }}.</p>
+  </div>
+</section>
+
+{% endblock %}

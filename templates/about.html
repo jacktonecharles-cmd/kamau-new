@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}About Us — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:150px 0 80px;">
+  <div class="container text-center reveal">
+    <span class="eyebrow">Our story</span>
+    <h1>Built on precision,<br>served with warmth.</h1>
+    <p style="max-width:600px; margin:0 auto;">Kamau Nails started with a simple idea: nail care in Nairobi deserved the same craft, hygiene and hospitality you'd expect from a five-star spa.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid grid-2" style="align-items:center; gap:60px;">
+    <div class="reveal">
+      <span class="eyebrow">Our mission</span>
+      <h2>Beauty that respects your time and your skin.</h2>
+      <p>We exist to make premium nail care accessible, safe and genuinely enjoyable — one appointment at a time. Every treatment is designed around client comfort, sterile technique and lasting results.</p>
+      <span class="eyebrow" style="margin-top:30px;">Our vision</span>
+      <h2>Kenya's most trusted name in nail artistry.</h2>
+      <p>We're growing into the studio every client recommends first — known equally for creativity and for doing the basics, like hygiene and punctuality, better than anyone else.</p>
+    </div>
+    <div class="grid grid-2 reveal-stagger">
+      <div class="card"><div class="card-icon">{{ icon('sparkle',24) }}</div><h3>Creativity</h3><p>Every set is treated as a small canvas.</p></div>
+      <div class="card"><div class="card-icon">{{ icon('star',24) }}</div><h3>Excellence</h3><p>Trained technicians, consistent results.</p></div>
+      <div class="card"><div class="card-icon">{{ icon('hand',24) }}</div><h3>Care</h3><p>Gentle technique, zero rushed appointments.</p></div>
+      <div class="card"><div class="card-icon">{{ icon('ring',24) }}</div><h3>Integrity</h3><p>Transparent pricing, honest advice.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Hygiene &amp; certification</span>
+      <h2>Your safety is non-negotiable</h2>
+    </div>
+    <div class="grid grid-3 reveal-stagger">
+      <div class="card"><div class="card-icon">{{ icon('sparkle',24) }}</div><h3>Hospital-grade sterilisation</h3><p>All metal tools are autoclaved between every single client.</p></div>
+      <div class="card"><div class="card-icon">{{ icon('hand',24) }}</div><h3>Single-use files &amp; buffers</h3><p>Disposable items are never reused, ever.</p></div>
+      <div class="card"><div class="card-icon">{{ icon('star',24) }}</div><h3>Certified technicians</h3><p>Every artist holds a recognised nail technology certification.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Meet the professional team</span>
+      <h2>The people behind every polished set</h2>
+    </div>
+    <div class="grid grid-4 reveal-stagger">
+      {% for t in techs %}
+      <div class="card team-card">
+        <div class="avatar">{{ t['initials'] }}</div>
+        <h3>{{ t['name'] }}</h3>
+        <p class="muted">{{ t['position'] }}</p>
+        <p class="muted" style="font-size:.85rem;">{{ t['specialties'] }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us — Kamau Nails{% endblock %}
+{% block content %}
+<div class="page-header">
+  <span class="section-eyebrow">We'd Love to Hear From You</span>
+  <h1>Contact Us</h1>
+</div>
+<section>
+  <div class="container contact-grid">
+    <div>
+      <div class="contact-info-item">
+        <div class="feature-icon">☎</div>
+        <div><h4>Phone</h4><p><a href="tel:0796 592972">0796 592972</a></p></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="feature-icon">✉</div>
+        <div><h4>Email</h4><p><a href="mailto:kk41397441@gmail.com">kk41397441@gmail.com</a></p></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="feature-icon">⏱</div>
+        <div><h4>Business Hours</h4><p>monday – Sunday: 8:00am – 7:00pm<br></p></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="feature-icon">📍</div>
+        <div><h4>Find Us</h4>
+        
+        </div><iframe src="https://www.google.com/maps?q=-0.084833,34.774944&output=embed" width="100%" height="220" style="border:0;border-radius:16px;" loading="lazy" allowfullscreen title="Kamau Nails location map"></iframe>
+      </div>
+    </div>
+
+    <div class="form-card" style="margin:0;">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.name.id_for_label }}">Your Name</label>
+          {{ form.name }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">Email Address</label>
+          {{ form.email }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.message.id_for_label }}">Message</label>
+          {{ form.message }}
+        </div>
+        <button type="submit" class="btn btn-gold btn-block">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

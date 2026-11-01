@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}FAQ — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:150px 0 60px;">
+  <div class="container text-center reveal">
+    <span class="eyebrow">Questions, answered</span>
+    <h1>Frequently asked questions</h1>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container" style="max-width:760px;">
+    {% set faqs = [
+      ('Do I need an appointment?','Walk-ins are welcome when we have space, but booking online guarantees your slot and technician of choice.'),
+      ('How do I pay?','You can pay in-salon by cash or card, or send payment via M-Pesa and upload your proof on our Payment page.'),
+      ('What is your cancellation policy?','We ask for at least 4 hours notice. See our full Cancellation Policy page for details.'),
+      ('Is it safe and hygienic?','Yes. All metal tools are sterilised between clients and disposable items are never reused.'),
+      ('Do you offer gift cards?','Yes, gift cards are available in-salon and make a great gift for any occasion.'),
+      ('Can children get their nails done?','Yes, we offer a gentle Kids Nail Service for children 12 and under.'),
+      ('Is tipping expected?','Tipping is always appreciated but never required.'),
+      ('What if I need to reschedule?','Call or WhatsApp us at least 4 hours before your slot and we will happily move it.')
+    ] %}
+    {% for q, a in faqs %}
+    <div class="accordion-item reveal">
+      <button>{{ q }} <span class="plus">+</span></button>
+      <div class="accordion-panel"><p>{{ a }}</p></div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

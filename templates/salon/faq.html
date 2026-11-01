@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}FAQ — Kamau Nails{% endblock %}
+{% block content %}
+<div class="page-header">
+  <span class="section-eyebrow">Good to Know</span>
+  <h1>Frequently Asked Questions</h1>
+</div>
+<section>
+  <div class="container" style="max-width:800px;">
+    {% with faqs=faqs|default:None %}
+    {% endwith %}
+    {% for q, a in faq_list %}{% endfor %}
+
+    <div class="faq-item">
+      <button class="faq-question">Do I need to book an appointment in advance? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>Yes, we recommend booking at least 24 hours ahead through our online booking page to guarantee your preferred technician and time slot.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What hygiene measures do you follow? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>All tools are sterilised in an autoclave between clients and we use disposable liners for every pedicure basin.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How much do your services cost? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>Pricing varies by service — visit our Services page for a full, up-to-date price list.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What payment methods do you accept? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>We accept M-Pesa payments. Send payment to 0796 592972 and upload your proof of payment on our Payment page.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Do you sell gift cards? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>Yes — gift cards are available in-salon and make a wonderful present for any occasion.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What is your cancellation policy? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>Please cancel or reschedule at least 12 hours in advance. See our full <a href="{% url 'policy' 'cancellation' %}">Cancellation Policy</a>.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How should I care for my nails after my appointment? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>Moisturise your cuticles daily, wear gloves for cleaning, and avoid using your nails as tools to make your set last longer.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Do you welcome children? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>Absolutely — see our <a href="{% url 'policy' 'children' %}">Children Policy</a> for age guidelines and services suited for kids.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Is tipping expected? <span class="faq-plus">+</span></button>
+      <div class="faq-answer"><p>Tipping is always appreciated but never required. See our <a href="{% url 'policy' 'tipping' %}">Tipping Information</a> page.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

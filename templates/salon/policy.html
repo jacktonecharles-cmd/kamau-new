@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} — Kamau Nails{% endblock %}
+{% block content %}
+<div class="page-header">
+  <span class="section-eyebrow">Policy</span>
+  <h1>{{ title }}</h1>
+</div>
+<section>
+  <div class="container" style="max-width:760px;">
+    {% if slug == 'cancellation' %}
+      <p>We kindly ask for at least 12 hours' notice to cancel or reschedule your appointment. Cancellations made with less notice may be subject to a fee to compensate the technician's reserved time.</p>
+    {% elif slug == 'no-show' %}
+      <p>Clients who miss an appointment without notice may be asked to pay a deposit for future bookings. Repeated no-shows may affect the ability to book online.</p>
+    {% elif slug == 'refund' %}
+      <p>If you're unhappy with a service, please let us know within 48 hours so we can make it right — whether that's a touch-up or a partial refund, evaluated case by case.</p>
+    {% elif slug == 'privacy' %}
+      <p>We collect only the information needed to manage your bookings and communicate with you. Your details are never sold and are stored securely.</p>
+    {% elif slug == 'terms' %}
+      <p>By booking with Kamau Nails, you agree to arrive on time, communicate allergies or sensitivities in advance, and follow our cancellation and payment policies.</p>
+    {% elif slug == 'health-safety' %}
+      <p>All tools are sterilised between clients, disposable liners are used for pedicures, and technicians follow strict hand hygiene protocols throughout every appointment.</p>
+    {% elif slug == 'children' %}
+      <p>Children are welcome for select services. Kids under 12 must be accompanied by an adult at all times during their appointment.</p>
+    {% elif slug == 'tipping' %}
+      <p>Tipping is a lovely way to show appreciation for great service but is entirely optional — typically 10–15% of the service price if you choose to tip.</p>
+    {% else %}
+      <p>This policy page is coming soon.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

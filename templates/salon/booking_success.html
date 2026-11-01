@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Booking Received — Kamau Nails{% endblock %}
+{% block content %}
+<section>
+  <div class="container text-center" style="max-width:600px;">
+    <span class="section-eyebrow">Thank You</span>
+    <h1>Your Booking Has Been Received!</h1>
+    <p>We've sent a confirmation to your email. Your appointment is <strong>pending confirmation</strong> — our team will reach out shortly to confirm your slot.</p>
+    <p>Need to pay a deposit now? <a href="{% url 'payment' %}">Submit your payment proof here</a>.</p>
+    <a href="{% url 'home' %}" class="btn btn-outline">Back to Home</a>
+  </div>
+</section>
+{% endblock %}

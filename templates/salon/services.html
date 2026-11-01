@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Services & Pricing — Kamau Nails{% endblock %}
+{% block content %}
+<div class="page-header">
+  <span class="section-eyebrow">Menu of Services</span>
+  <h1>Services &amp; Pricing</h1>
+</div>
+
+{% for category in categories %}
+<section class="{% cycle '' 'bg-blush' %}">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:36px;">
+      <h2>{{ category.name }}</h2>
+    </div>
+    <div class="grid grid-3">
+      {% for service in category.services.all %}
+      <div class="service-card">
+        <img src="{{ service.image_url }}" alt="{{ service.name }}" loading="lazy">
+        <div class="service-card-body">
+          <h3><a href="{% url 'service_detail' service.slug %}">{{ service.name }}</a></h3>
+          <p>{{ service.description|truncatewords:16 }}</p>
+          <div class="service-meta">
+            <span class="price">KSh {{ service.price }}</span>
+            <span class="duration">{{ service.duration_minutes }} min</span>
+          </div>
+          <a href="{% url 'booking' %}?service={{ service.slug }}" class="btn btn-outline btn-sm btn-block mt-40">Book Now</a>
+        </div>
+      </div>
+      {% empty %}
+      <p>No services in this category yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% empty %}
+<section><div class="container"><p class="text-center">Services will appear here once added in the admin dashboard.</p></div></section>
+{% endfor %}
+{% endblock %}

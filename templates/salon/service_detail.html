@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ service.name }} — Kamau Nails{% endblock %}
+{% block content %}
+<section>
+  <div class="container grid grid-2" style="align-items:flex-start;">
+    <img src="{{ service.image_url }}" alt="{{ service.name }}" loading="lazy">
+    <div>
+      <span class="section-eyebrow">{{ service.category.name }}</span>
+      <h1>{{ service.name }}</h1>
+      <p>{{ service.description }}</p>
+      <div class="service-meta" style="border:none;padding:20px 0;">
+        <span class="price">KSh {{ service.price }}</span>
+        <span class="duration">{{ service.duration_minutes }} minutes</span>
+      </div>
+      <a href="{% url 'booking' %}?service={{ service.slug }}" class="btn btn-gold">Book This Service</a>
+    </div>
+  </div>
+
+  {% if related %}
+  <div class="container mt-40">
+    <div class="section-head"><h2>You May Also Like</h2></div>
+    <div class="grid grid-3">
+      {% for s in related %}
+      <div class="service-card">
+        <img src="{{ s.image_url }}" alt="{{ s.name }}" loading="lazy">
+        <div class="service-card-body">
+          <h3><a href="{% url 'service_detail' s.slug %}">{{ s.name }}</a></h3>
+          <div class="service-meta"><span class="price">KSh {{ s.price }}</span><span class="duration">{{ s.duration_minutes }} min</span></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

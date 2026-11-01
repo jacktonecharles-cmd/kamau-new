@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block content %}
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Kisumu's premium nail studio</span>
+      <h1>Where beauty<br>begins at your <em>fingertips.</em></h1>
+      <p>Manicures, pedicures, acrylics, gel and hand-painted nail art — delivered in a calm, hygienic, luxury studio designed entirely around you.</p>
+      <div class="hero-cta">
+        <a href="{{ url_for('booking') }}" class="btn btn-primary">Book Appointment</a>
+        <a href="{{ url_for('services') }}" class="btn btn-outline">View Services</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>4.9★</strong><span>Average Rating</span></div>
+        <div><strong>12k+</strong><span>Happy Clients</span></div>
+        <div><strong>4</strong><span>Expert Technicians</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="210" cy="230" r="190" fill="var(--blush)"/>
+        <path d="M150 300c0-70 10-140 35-180 8-13 28-13 34 2 10 26 6 60 0 90" fill="none" stroke="var(--berry)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M186 300c-3-60 2-120 18-155 7-14 27-13 32 2 9 24 6 70-2 110" fill="none" stroke="var(--berry)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M222 300c-2-55 4-110 20-140 7-13 26-12 31 3 8 22 6 65-3 100" fill="none" stroke="var(--berry)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M150 300c-30 10-45 30-42 55 4 34 34 60 78 60 50 0 86-30 90-70 3-25-4-45-4-45" fill="none" stroke="var(--berry)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M143 158c-4-16 4-28 16-24 9 3 12 16 8 30" fill="none" stroke="var(--berry)" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="167" cy="128" rx="9" ry="16" fill="var(--gold)" transform="rotate(-8 167 128)"/>
+        <ellipse cx="204" cy="112" rx="9" ry="17" fill="var(--gold)" transform="rotate(-2 204 112)"/>
+        <ellipse cx="241" cy="118" rx="9" ry="16" fill="var(--gold)" transform="rotate(4 241 118)"/>
+        <g>
+          <rect x="290" y="330" width="46" height="70" rx="10" fill="var(--white)" stroke="var(--berry)" stroke-width="3"/>
+          <rect x="303" y="308" width="20" height="26" rx="5" fill="var(--berry)"/>
+          <rect x="296" y="350" width="34" height="38" rx="6" fill="var(--sky)"/>
+        </g>
+        <path d="M60 380c30-4 55 8 60 26" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 10"/>
+      </svg>
+      <div class="float-chip chip-1">{{ icon('star', 16) }} Loved by 12,000+ clients</div>
+      <div class="float-chip chip-2">{{ icon('clock', 16) }} Same-day slots available</div>
+    </div>
+  </div>
+  <div class="container">
+    <svg class="stroke-divider" viewBox="0 0 1180 60" preserveAspectRatio="none"><path d="M10 40 Q 300 -10 590 35 T 1170 30"/></svg>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Signature services</span>
+      <h2>Featured treatments</h2>
+      <p>A glimpse of the artistry waiting for you — see the full menu for every category, duration and price.</p>
+    </div>
+    <div class="grid grid-3 reveal-stagger">
+      {% for s in featured %}
+      <div class="service-card">
+        <div class="service-media">{{ icon(s['icon'], 60) }}</div>
+        <div class="service-body">
+          <span class="tag">{{ s['category'] }}</span>
+          <h3 style="margin-top:12px;">{{ s['name'] }}</h3>
+          <p>{{ s['description'] }}</p>
+          <div class="service-meta">
+            <span class="price">KES {{ s['price'] }}</span>
+            <a href="{{ url_for('booking') }}" class="btn btn-outline btn-sm">Book Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container grid grid-2" style="align-items:center; gap:60px;">
+    <div class="reveal">
+      <span class="eyebrow">Why Kamau Nails</span>
+      <h2>Beauty, hygiene and artistry — in equal measure.</h2>
+      <p>We built Kamau Nails around three promises: spotless hygiene standards, technicians who treat every set like a masterpiece, and a studio that feels like a small luxury even on a Tuesday afternoon.</p>
+    </div>
+    <div class="grid grid-2 reveal-stagger">
+      <div class="card">
+        <div class="card-icon">{{ icon('sparkle', 26) }}</div>
+        <h3>Hospital-grade hygiene</h3>
+        <p>Every tool is sterilised between clients, no exceptions.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">{{ icon('star', 26) }}</div>
+        <h3>Certified artists</h3>
+        <p>Our technicians train continuously in the latest techniques.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">{{ icon('clock', 26) }}</div>
+        <h3>On-time, every time</h3>
+        <p>Book online and walk straight into your appointment.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">{{ icon('ring', 26) }}</div>
+        <h3>Bridal-ready finishes</h3>
+        <p>Trial sets and wedding-day packages for your big day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Loved by our clients</span>
+      <h2>Kind words from the chair</h2>
+    </div>
+    <div class="testimonial-track reveal-stagger">
+      {% for t in testimonials %}
+      <div class="testimonial-card">
+        <p>{{ t['quote'] }}</p>
+        <div class="testimonial-name">{{ t['customer_name'] }}</div>
+        <div class="rating-stars">{{ '★' * t['rating'] }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Gallery preview</span>
+      <h2>A peek at recent work</h2>
+    </div>
+    <div class="grid grid-4 reveal-stagger">
+      {% for i in ['sparkle','brush','hand','ring'] %}
+      <div class="gallery-item"><div>{{ icon(i, 40) }}</div></div>
+      {% endfor %}
+    </div>
+    <div class="text-center" style="margin-top:36px;">
+      <a href="{{ url_for('gallery') }}" class="btn btn-outline">View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Meet the artists</span>
+      <h2>The hands behind every set</h2>
+    </div>
+    <div class="grid grid-3 reveal-stagger">
+      {% for t in techs %}
+      <div class="card team-card">
+        <div class="avatar">{{ t['initials'] }}</div>
+        <h3>{{ t['name'] }}</h3>
+        <p class="muted">{{ t['position'] }} · {{ t['years_experience'] }} yrs experience</p>
+        <div class="rating-stars">{{ '★' * (t['rating']|round|int) }}</div>
+        <a href="{{ url_for('booking') }}" class="btn btn-outline btn-sm">Book {{ t['name'].split(' ')[0] }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink">
+  <div class="container text-center reveal">
+    <span class="eyebrow" style="color:var(--gold-soft);">Limited-time offer</span>
+    <h2>20% off Gel Manicures this week</h2>
+    <div class="countdown" data-countdown="2026-07-11T23:59:59">
+      <div><strong class="cd-days">00</strong><span>Days</span></div>
+      <div><strong class="cd-hours">00</strong><span>Hours</span></div>
+      <div><strong class="cd-mins">00</strong><span>Mins</span></div>
+      <div><strong class="cd-secs">00</strong><span>Secs</span></div>
+    </div>
+    <a href="{{ url_for('booking') }}" class="btn btn-gold" style="margin-top:24px;">Claim This Offer</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Follow along</span>
+      <h2>@kamaunails on Instagram</h2>
+    </div>
+    <div class="grid grid-4 reveal-stagger">
+      {% for i in ['brush','sparkle','hand','foot'] %}
+      <div class="gallery-item">{{ icon(i, 36) }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

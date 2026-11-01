@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Policies — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:150px 0 60px;">
+  <div class="container text-center reveal">
+    <span class="eyebrow">Good to know</span>
+    <h1>Our policies</h1>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container policy-layout">
+    <nav class="policy-nav reveal">
+      <a href="{{ url_for('policies', section='cancellation') }}" class="{{ 'active preselected' if not section or section=='cancellation' }}">Cancellation Policy</a>
+      <a href="{{ url_for('policies', section='noshow') }}" class="{{ 'active preselected' if section=='noshow' }}">No-show Policy</a>
+      <a href="{{ url_for('policies', section='refund') }}" class="{{ 'active preselected' if section=='refund' }}">Refund Policy</a>
+      <a href="{{ url_for('policies', section='privacy') }}" class="{{ 'active preselected' if section=='privacy' }}">Privacy Policy</a>
+      <a href="{{ url_for('policies', section='terms') }}" class="{{ 'active preselected' if section=='terms' }}">Terms &amp; Conditions</a>
+      <a href="{{ url_for('policies', section='health') }}" class="{{ 'active preselected' if section=='health' }}">Health &amp; Safety</a>
+      <a href="{{ url_for('policies', section='children') }}" class="{{ 'active preselected' if section=='children' }}">Children Policy</a>
+      <a href="{{ url_for('policies', section='tipping') }}" class="{{ 'active preselected' if section=='tipping' }}">Tipping</a>
+    </nav>
+    <div class="policy-content reveal">
+      {% if not section or section == 'cancellation' %}
+        <h2>Cancellation Policy</h2>
+        <p>We kindly ask for at least 4 hours' notice to cancel or reschedule an appointment. This allows us to offer the slot to another client.</p>
+      {% elif section == 'noshow' %}
+        <h2>No-show Policy</h2>
+        <p>Missing an appointment without notice may require a deposit for future bookings. Repeated no-shows may affect your ability to book online.</p>
+      {% elif section == 'refund' %}
+        <h2>Refund Policy</h2>
+        <p>If you're unhappy with a service, tell us within 48 hours and we'll gladly offer a correction or, where appropriate, a refund.</p>
+      {% elif section == 'privacy' %}
+        <h2>Privacy Policy</h2>
+        <p>We collect only the information needed to manage your bookings and communicate with you. We never sell your data to third parties.</p>
+      {% elif section == 'terms' %}
+        <h2>Terms &amp; Conditions</h2>
+        <p>By booking with Kamau Nails, you agree to our cancellation, no-show and refund policies as outlined on this page.</p>
+      {% elif section == 'health' %}
+        <h2>Health &amp; Safety Policy</h2>
+        <p>All tools are sterilised between clients, disposable items are single-use, and our staff follow strict hand hygiene protocols throughout the day.</p>
+      {% elif section == 'children' %}
+        <h2>Children Policy</h2>
+        <p>Children are welcome for our Kids Nail Service. For safety, please supervise children in the waiting area at all times.</p>
+      {% elif section == 'tipping' %}
+        <h2>Tipping Information</h2>
+        <p>Tipping is appreciated but never expected. Cash tips go directly to your technician.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

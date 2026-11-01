@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}Payment — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:150px 0 40px;">
+  <div class="container" style="max-width:720px;">
+    <div class="text-center reveal">
+      <span class="eyebrow">Secure payment</span>
+      <h1>Complete your payment</h1>
+    </div>
+
+    <div class="payment-box reveal">
+      <p style="color:#F3D3DC;">Send payment via M-Pesa to</p>
+      <div class="number">{{ payment_number }}</div>
+      <p style="color:#F3D3DC;">Then fill in the form below with your transaction details and a screenshot as proof.</p>
+    </div>
+
+    <form class="form-card reveal" method="post" action="{{ url_for('payment') }}" enctype="multipart/form-data">
+      <div class="form-grid">
+        <div class="field">
+          <label for="p_name">Full name</label>
+          <input type="text" id="p_name" name="customer_name" value="{{ form.get('customer_name','') }}" required>
+        </div>
+        <div class="field">
+          <label for="p_phone">Phone number</label>
+          <input type="tel" id="p_phone" name="phone" value="{{ form.get('phone','') }}" required>
+        </div>
+        <div class="field full">
+          <label for="p_service">Service paid for</label>
+          <input type="text" id="p_service" name="service_name" placeholder="E.g. Gel Manicure" value="{{ form.get('service_name','') }}">
+        </div>
+        <div class="field">
+          <label for="p_amount">Amount paid (KES)</label>
+          <input type="text" id="p_amount" name="amount_paid" value="{{ form.get('amount_paid','') }}" required>
+        </div>
+        <div class="field">
+          <label for="p_code">Transaction code</label>
+          <input type="text" id="p_code" name="transaction_code" value="{{ form.get('transaction_code','') }}" required>
+        </div>
+        <div class="field full">
+          <label for="p_screenshot">Upload payment screenshot</label>
+          <input type="file" id="p_screenshot" name="screenshot" accept=".png,.jpg,.jpeg,.webp,.pdf">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Submit Payment Proof</button>
+      <p class="helper text-center" style="margin-top:16px;">Our team verifies payments within a few hours during business hours.</p>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

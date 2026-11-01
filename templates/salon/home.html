@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static salon_extras %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-blob one"></div>
+  <div class="hero-blob two"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="hero-eyebrow">Premium Nail Studio, kisumu</span>
+      <h1>Where Beauty Begins at <span class="accent">Your Fingertips</span></h1>
+      <p class="hero-sub">Kamau Nails blends meticulous hygiene, creative artistry and five-star pampering — manicures, pedicures, acrylics, gel and bespoke nail art in one luxurious space.</p>
+      <div class="hero-cta">
+        <a href="{% url 'booking' %}" class="btn btn-gold">Book Appointment</a>
+        <a href="{% url 'services' %}" class="btn btn-outline">View Services</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>4.9★</strong><span>Average rating</span></div>
+        <div><strong>6+</strong><span>Years of artistry</span></div>
+        <div><strong>1,000+</strong><span>Happy clients</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900&q=80" alt="Elegant gel manicure with soft pink polish" loading="lazy">
+      </div>
+      <div class="hero-float-card">
+        <span class="stars">★★★★★</span>
+        <div><strong>"Absolutely flawless."</strong><br><small>— Wanjiru M.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="gold-drip" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0,0 C150,40 350,40 500,10 C650,-15 800,45 1000,20 C1080,10 1140,25 1200,15 L1200,46 L0,46 Z"></path></svg>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Signature Services</span>
+      <h2>Featured Treatments</h2>
+      <p>A taste of what awaits — every service finished with our signature hand massage and gold-leaf touch.</p>
+    </div>
+    <div class="grid grid-3">
+      {% for service in featured_services %}
+      <div class="service-card">
+        <img src="{{ service.image_url }}" alt="{{ service.name }}" loading="lazy">
+        <div class="service-card-body">
+          <h3>{{ service.name }}</h3>
+          <p>{{ service.description|truncatewords:16 }}</p>
+          <div class="service-meta">
+            <span class="price">KSh {{ service.price }}</span>
+            <span class="duration">{{ service.duration_minutes }} min</span>
+          </div>
+          <a href="{% url 'booking' %}?service={{ service.slug }}" class="btn btn-outline btn-sm btn-block mt-40">Book Now</a>
+        </div>
+      </div>
+      {% empty %}
+      <p>Featured services will appear here once added in the admin dashboard.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="bg-blush">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">The Kamau Difference</span>
+      <h2>Why Choose Kamau Nails</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="feature-item">
+        <div class="feature-icon">✦</div>
+        <div><h4>Hospital-grade Hygiene</h4><p>Single-use tools and full sterilisation between every client.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✎</div>
+        <div><h4>Bespoke Nail Art</h4><p>Custom designs crafted to match your mood, outfit or occasion.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">♛</div>
+        <div><h4>Certified Technicians</h4><p>Trained, insured professionals with years of hands-on artistry.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⏱</div>
+        <div><h4>On-Time, Every Time</h4><p>Online booking keeps your appointment exact, with reminders sent ahead.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Loved By Our Clients</span>
+      <h2>What They're Saying</h2>
+    </div>
+    <div class="grid grid-3">
+      {% for t in testimonials %}
+      <div class="testimonial-card">
+        <div class="testimonial-stars">{% for _ in t.rating|times %}★{% endfor %}</div>
+        <p>"{{ t.quote }}"</p>
+        <div class="testimonial-person">
+          {% if t.photo_url %}<img src="{{ t.photo_url }}" alt="{{ t.client_name }}">{% endif %}
+          <strong>{{ t.client_name }}</strong>
+        </div>
+      </div>
+      {% empty %}
+      <p>Client testimonials will appear here.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="bg-blush">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Our Work</span>
+      <h2>Gallery Preview</h2>
+    </div>
+    <div class="gallery-grid">
+      {% for img in gallery_preview %}
+      <figure data-lightbox="{{ img.image_url }}">
+        <img src="{{ img.image_url }}" alt="{{ img.title }}" loading="lazy">
+        <figcaption>{{ img.title }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+    <p class="text-center mt-40"><a href="{% url 'gallery' %}" class="btn btn-outline">View Full Gallery</a></p>
+  </div>
+</section>
+
+<section class="bg-ink">
+  <div class="container text-center">
+    <span class="section-eyebrow">Stay In The Loop</span>
+    <h2>Get First Access to Promotions</h2>
+    <p style="max-width:520px;margin:0 auto 24px;">Subscribe for early-bird discounts, seasonal offers and nail-care tips straight to your inbox.</p>
+    <form action="{% url 'newsletter_signup' %}" method="post" style="display:flex;gap:10px;max-width:420px;margin:0 auto;">
+      {% csrf_token %}
+      <input type="email" name="email" placeholder="Your email address" required style="flex:1;padding:14px 18px;border-radius:999px;border:none;">
+      <button type="submit" class="btn btn-gold">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

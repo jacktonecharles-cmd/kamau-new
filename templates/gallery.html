@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}Gallery — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:150px 0 60px;">
+  <div class="container text-center reveal">
+    <span class="eyebrow">Our work</span>
+    <h1>Gallery</h1>
+    <p style="max-width:560px; margin:0 auto;">Browse recent sets by category, or filter to find the exact style you're after. Tap any tile for a closer look.</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container">
+    <div class="gallery-filters reveal">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="acrylic">Acrylic</button>
+      <button data-filter="gel">Gel</button>
+      <button data-filter="art">Nail Art</button>
+      <button data-filter="french">French Tips</button>
+      <button data-filter="bridal">Bridal</button>
+      <button data-filter="pedicure">Pedicures</button>
+    </div>
+
+    <div class="gallery-grid reveal-stagger">
+      {% set items = [
+        ('acrylic','sparkle','Acrylic — Almond Set'),
+        ('gel','hand','Gel — Glossy Nude'),
+        ('art','brush','Nail Art — Floral Detail'),
+        ('french','star','French Tips — Classic'),
+        ('bridal','ring','Bridal — Pearl Accent'),
+        ('pedicure','foot','Spa Pedicure'),
+        ('art','brush','Nail Art — Abstract Line'),
+        ('acrylic','sparkle','Acrylic — Coffin Shape'),
+        ('gel','hand','Gel — Chrome Finish'),
+        ('french','star','French Tips — Colour Pop'),
+        ('bridal','ring','Bridal — Trial Set'),
+        ('pedicure','foot','Luxury Pedicure')
+      ] %}
+      {% for cat, ic, label in items %}
+      <div class="gallery-item" data-category="{{ cat }}">
+        <div>{{ icon(ic, 40) }}</div>
+        <div class="g-label">{{ label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container text-center reveal">
+    <span class="eyebrow">Before &amp; after</span>
+    <h2>See the transformation</h2>
+    <div class="grid grid-3 reveal-stagger" style="margin-top:30px;">
+      {% for label in ['Broken nails restored','Overgrown to elegant','Bare to bridal-ready'] %}
+      <div class="card">
+        <div class="service-media" style="border-radius:16px;">{{ icon('sparkle', 44) }}</div>
+        <h3 style="margin-top:16px;">{{ label }}</h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}About Us — Kamau Nails{% endblock %}
+{% block content %}
+<div class="page-header">
+  <span class="section-eyebrow">Our Story</span>
+  <h1>About Kamau Nails</h1>
+</div>
+
+<section>
+  <div class="container grid grid-2" style="align-items:center;">
+    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=80" alt="Kamau Nails salon interior" loading="lazy">
+    <div>
+      <span class="section-eyebrow">Company Story</span>
+      <h2>Crafted with Care, Since Day One</h2>
+      <p>Kamau Nails began as a single chair with a simple promise: treat every client like royalty. Today we're a full luxury studio, but that promise hasn't changed — every appointment is an experience, not just a service.</p>
+      <p>Our mission is to make world-class nail artistry accessible, hygienic and joyful. Our vision is to become the most trusted nail destination in the region, known for creativity and consistency in equal measure.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-blush">
+  <div class="container grid grid-4">
+    <div class="feature-item"><div class="feature-icon">♥</div><div><h4>Core Value: Care</h4><p>Every client's comfort and confidence comes first.</p></div></div>
+    <div class="feature-item"><div class="feature-icon">✦</div><div><h4>Core Value: Craft</h4><p>Precision and artistry in every single set.</p></div></div>
+    <div class="feature-item"><div class="feature-icon">✓</div><div><h4>Core Value: Cleanliness</h4><p>Hospital-grade sterilisation, always.</p></div></div>
+    <div class="feature-item"><div class="feature-icon">☺</div><div><h4>Core Value: Community</h4><p>A warm, welcoming space for everyone.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Hygiene &amp; Certification</span>
+      <h2>Your Safety, Guaranteed</h2>
+      <p>All tools are sterilised in a hospital-grade autoclave between clients, disposable liners are used for every pedicure basin, and our technicians are certified in infection control and nail health best practices.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-blush">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Meet The Team</span>
+      <h2>The Hands Behind The Art</h2>
+    </div>
+    <div class="grid grid-4">
+      {% for t in technicians %}
+      <div class="team-card">
+        <img src="{{ t.photo_url }}" alt="{{ t.name }}" loading="lazy">
+        <div class="team-card-body">
+          <h4>{{ t.name }}</h4>
+          <p style="margin-bottom:4px;">{{ t.position }} &middot; {{ t.years_experience }} yrs</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

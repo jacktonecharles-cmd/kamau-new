@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found — Kamau Nails{% endblock %}
+{% block content %}
+<section class="hero text-center" style="padding:200px 0;">
+  <div class="container">
+    <span class="eyebrow">404</span>
+    <h1>This page wandered off.</h1>
+    <p>Let's get you back to something polished.</p>
+    <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Make a Payment — Kamau Nails{% endblock %}
+{% block content %}
+<div class="page-header">
+  <span class="section-eyebrow">Secure Payment</span>
+  <h1>Make a Payment</h1>
+</div>
+<section>
+  <div class="container">
+    <div class="payment-box">
+      <p style="color:rgba(255,255,255,.8);margin-bottom:6px;">Send payment via M-Pesa to</p>
+      <div class="number">{{ payment_number }}</div>
+      <p style="color:rgba(255,255,255,.8);margin-top:6px;">Then fill in the form below with your transaction details and upload a screenshot as proof.</p>
+    </div>
+
+    <div class="form-card">
+      <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">
+            <label for="{{ form.customer_name.id_for_label }}">Customer Name</label>
+            {{ form.customer_name }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+            {{ form.phone }}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="{{ form.service_name.id_for_label }}">Service</label>
+            {{ form.service_name }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.amount_paid.id_for_label }}">Amount Paid (KSh)</label>
+            {{ form.amount_paid }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.transaction_code.id_for_label }}">Transaction Code</label>
+          {{ form.transaction_code }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.screenshot.id_for_label }}">Upload Payment Screenshot</label>
+          {{ form.screenshot }}
+          {% for e in form.screenshot.errors %}<div class="form-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <button type="submit" class="btn btn-gold btn-block">Submit Payment</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

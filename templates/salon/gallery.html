@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Gallery — Kamau Nails{% endblock %}
+{% block content %}
+<div class="page-header">
+  <span class="section-eyebrow">Our Portfolio</span>
+  <h1>Gallery</h1>
+</div>
+<section>
+  <div class="container">
+    <div class="filter-bar">
+      <a href="{% url 'gallery' %}" class="{% if active_category == 'all' %}active{% endif %}">All</a>
+      {% for value, label in categories %}
+      <a href="?category={{ value }}" class="{% if active_category == value %}active{% endif %}">{{ label }}</a>
+      {% endfor %}
+    </div>
+    <div class="gallery-grid">
+      {% for img in images %}
+      <figure data-lightbox="{{ img.image_url }}">
+        <img src="{{ img.image_url }}" alt="{{ img.title }}" loading="lazy">
+        <figcaption>{{ img.title }}</figcaption>
+      </figure>
+      {% empty %}
+      <p>No photos in this category yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

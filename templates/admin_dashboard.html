@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Kamau Nails</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav container">
+    <a href="{{ url_for('admin_dashboard') }}" class="brand">Kamau Nails · Admin</a>
+    <div class="nav-actions">
+      <span class="muted" style="margin-right:14px;">Hi, {{ session.get('admin_username') }}</span>
+      <a href="{{ url_for('admin_logout') }}" class="btn btn-outline btn-sm">Log Out</a>
+    </div>
+  </nav>
+</header>
+
+<div class="admin-shell">
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="stat-grid">
+      <div class="stat-card"><strong>{{ stats.total_bookings }}</strong><span>Total Bookings</span></div>
+      <div class="stat-card"><strong>{{ stats.pending_bookings }}</strong><span>Pending Bookings</span></div>
+      <div class="stat-card"><strong>{{ stats.total_payments }}</strong><span>Payments Submitted</span></div>
+      <div class="stat-card"><strong>{{ stats.unverified_payments }}</strong><span>Awaiting Verification</span></div>
+      <div class="stat-card"><strong>{{ stats.messages }}</strong><span>Contact Messages</span></div>
+    </div>
+
+    <h2>Bookings</h2>
+    <div class="admin-table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Customer</th><th>Service</th><th>Technician</th><th>Date/Time</th><th>Status</th><th>Update</th></tr></thead>
+        <tbody>
+          {% for b in bookings %}
+          <tr>
+            <td>{{ b['id'] }}</td>
+            <td>{{ b['customer_name'] }}<br><span class="muted" style="font-size:.78rem;">{{ b['phone'] }}</span></td>
+            <td>{{ b['service_name'] or '—' }}</td>
+            <td>{{ b['technician_name'] or 'No preference' }}</td>
+            <td>{{ b['booking_date'] }}<br>{{ b['booking_time'] }}</td>
+            <td><span class="status-pill status-{{ b['status'] }}">{{ b['status'] }}</span></td>
+            <td>
+              <form class="inline-form" method="post" action="{{ url_for('update_booking_status', booking_id=b['id']) }}">
+                <select name="status">
+                  {% for st in ['Pending','Confirmed','Completed','Cancelled'] %}
+                  <option value="{{ st }}" {% if b['status']==st %}selected{% endif %}>{{ st }}</option>
+                  {% endfor %}
+                </select>
+                <button class="btn btn-outline btn-sm" type="submit">Save</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="7" class="text-center muted">No bookings yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Payment Proofs</h2>
+    <div class="admin-table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Customer</th><th>Service</th><th>Amount</th><th>Txn Code</th><th>Proof</th><th>Status</th><th>Update</th></tr></thead>
+        <tbody>
+          {% for p in payments %}
+          <tr>
+            <td>{{ p['id'] }}</td>
+            <td>{{ p['customer_name'] }}<br><span class="muted" style="font-size:.78rem;">{{ p['phone'] }}</span></td>
+            <td>{{ p['service_name'] or '—' }}</td>
+            <td>KES {{ p['amount_paid'] }}</td>
+            <td>{{ p['transaction_code'] }}</td>
+            <td>{% if p['screenshot_filename'] %}<a href="{{ url_for('uploaded_file', filename=p['screenshot_filename']) }}" target="_blank">View</a>{% else %}—{% endif %}</td>
+            <td><span class="status-pill status-{{ p['status'] }}">{{ p['status'] }}</span></td>
+            <td>
+              <form class="inline-form" method="post" action="{{ url_for('update_payment_status', payment_id=p['id']) }}">
+                <select name="status">
+                  {% for st in ['Awaiting Verification','Verified','Rejected'] %}
+                  <option value="{{ st }}" {% if p['status']==st %}selected{% endif %}>{{ st }}</option>
+                  {% endfor %}
+                </select>
+                <button class="btn btn-outline btn-sm" type="submit">Save</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="8" class="text-center muted">No payments submitted yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Contact Messages</h2>
+    <div class="admin-table-wrap" style="margin-bottom:60px;">
+      <table>
+        <thead><tr><th>#</th><th>Name</th><th>Contact</th><th>Subject</th><th>Message</th><th>Received</th></tr></thead>
+        <tbody>
+          {% for m in messages %}
+          <tr>
+            <td>{{ m['id'] }}</td>
+            <td>{{ m['name'] }}</td>
+            <td>{{ m['email'] }}<br>{{ m['phone'] }}</td>
+            <td>{{ m['subject'] }}</td>
+            <td style="max-width:280px;">{{ m['message'] }}</td>
+            <td>{{ m['created_at'] }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="6" class="text-center muted">No messages yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

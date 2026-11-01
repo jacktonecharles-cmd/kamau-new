@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Meet Our Team — Kamau Nails{% endblock %}
+{% block content %}
+
+<section class="hero" style="padding:150px 0 60px;">
+  <div class="container text-center reveal">
+    <span class="eyebrow">Meet our team</span>
+    <h1>The artists behind every set</h1>
+    <p style="max-width:560px; margin:0 auto;">Every technician at Kamau Nails is certified, insured, and continually trained in the latest techniques.</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container grid grid-4 reveal-stagger">
+    {% for t in techs %}
+    <div class="card team-card">
+      <div class="avatar">{{ t['initials'] }}</div>
+      <h3>{{ t['name'] }}</h3>
+      <p class="muted">{{ t['position'] }}</p>
+      <p class="muted" style="font-size:.85rem;">{{ t['years_experience'] }} years experience</p>
+      <p style="font-size:.85rem;">{{ t['specialties'] }}</p>
+      <div class="rating-stars">{{ '★' * (t['rating']|round|int) }} <span class="muted" style="font-size:.75rem;">{{ t['rating'] }}</span></div>
+      <a href="{{ url_for('booking') }}?technician={{ t['id'] }}" class="btn btn-primary btn-sm">Book {{ t['name'].split(' ')[0] }}</a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
